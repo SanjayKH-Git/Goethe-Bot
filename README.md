@@ -8,9 +8,7 @@ This README provides instructions for setting up the project and activating the 
 * Python 3.x (https://www.python.org/downloads/)
 * Playwright (https://playwright.dev/)
 
-**Installation**
-
-**1. Create a Virtual Environment (Recommended)**
+**Create a Virtual Environment (Recommended)**
 
 A virtual environment isolates project dependencies from your system-wide Python installation. Here's how to create one using `venv`:
 
@@ -20,13 +18,13 @@ source venv/bin/activate  # Linux/macOS
 venv\Scripts\activate.bat  # Windows
 ```
 
-**Installing Plawright
+**Installing Plawright**
 ```bash
 pip install playwright
 playwright install
 ```
 
-**Running Script
+**Running Script**
 ```bash
 python goethe_bot.py
 ```
