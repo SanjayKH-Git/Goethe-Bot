@@ -8,6 +8,12 @@ This README provides instructions for setting up the project and activating the 
 * Python 3.x (https://www.python.org/downloads/)
 * Playwright (https://playwright.dev/)
 
+clone the repository to your local machine:
+```
+git clone https://github.com/SanjayKH-Git/Goethe-Bot 
+cd Goethe-Bot  # Change to the repository directory
+```
+
 **Create a Virtual Environment (Recommended)**
 
 A virtual environment isolates project dependencies from your system-wide Python installation. Here's how to create one using `venv`:
