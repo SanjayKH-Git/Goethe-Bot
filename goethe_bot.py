@@ -22,13 +22,11 @@ async def open_page_from_row(row_data, url, page, page_number):
 
     # Find all elements with the selector //pr-button
     pr_buttons = await page.query_selector_all('//td[@class="pr-buttons"]//button')
-    
-    print(pr_buttons)
 
     # Click the first clickable button if found
     for button in pr_buttons:
         if await button.is_enabled():
-            print("Clickable button found. Clicking it.", button)
+            print("Open Green button found. Clicking it.")
             await button.click()
             await page.wait_for_load_state('load')
             time.sleep(2)            
@@ -41,13 +39,9 @@ async def open_page_from_row(row_data, url, page, page_number):
     # Click checkboxes except those related to interests
     for checkbox in all_checkboxes:
         checkbox_id = await checkbox.get_attribute('for')
-        # Check if checkbox name contains any of the interests
         
         if checkbox_id.strip().lower() not in interests:
-            print(checkbox_id, await checkbox.is_checked())
-            # if await checkbox.is_checked():
             print(f"Clicking checkbox: {checkbox_id}")
-            # await checkbox.click()
             await page.evaluate('(element) => element.click()', checkbox)
 
     continue_button = await page.query_selector('//button[@class="cs-button cs-button--arrow_next"]')
@@ -58,7 +52,7 @@ async def open_page_from_row(row_data, url, page, page_number):
         time.sleep(2)
 
     book_buttun = await page.query_selector('//button[contains(., "Book for myself")]')
-
+    print("Clicking on Book for myself Button")
     if book_buttun:
         await book_buttun.click() 
         await page.wait_for_load_state('load')
@@ -71,15 +65,11 @@ async def open_page_from_row(row_data, url, page, page_number):
     password = row_data["Password"]
     password_input = await page.query_selector('//input[@id="password"]')
     await password_input.fill(password)
-    await password_input.press("Enter")
+    print("Entered Credentials")
 
-    
-
+    await password_input.press("Enter")    
     time.sleep(5)
-    page_content = await page.title()
-    print(f"Page {page_number} title: {page_content}")
-
-    await page.wait_for_timeout(5000)     
+    print(f"Successfully booked slot for {row_data["Name"]}")
 
 async def main(file_path):
     async with async_playwright() as p:
@@ -117,6 +107,6 @@ async def main(file_path):
 # Run the script with the uploaded CSV file path
 input_csv = input("Enter Input CSV: ")
 if not input_csv:
-    input_csv = 'abiya_eldhose_details.csv'
+    input_csv = 'default_example_input.csv'
 
 asyncio.run(main(input_csv))

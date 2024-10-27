@@ -37,5 +37,5 @@ python goethe_bot.py
 
 **> Keep the CSV File in same folder**
 
-**> Input the proper CSV File Name or File path**
+**> Input the proper CSV File Name or File path (otherwise it will take Default Input File)**
 
