@@ -6,6 +6,7 @@ from playwright.async_api import async_playwright
 async def open_page_from_row(row_data, url, page, page_number):
     print(f"Opening page {page_number}: {url}")
     await page.goto(url)
+    await page.wait_for_load_state('load')
 
     # Send other column data as parameters (for example, printing them)
     print(f"Row Data for Page {page_number}: {row_data}")
@@ -23,6 +24,10 @@ async def open_page_from_row(row_data, url, page, page_number):
     # Find all elements with the selector //pr-button
     pr_buttons = await page.query_selector_all('//td[@class="pr-buttons"]//button')
 
+    if not pr_buttons:
+        print("No open Exams")
+        return
+    
     # Click the first clickable button if found
     for button in pr_buttons:
         if await button.is_enabled():
